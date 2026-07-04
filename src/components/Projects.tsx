@@ -40,7 +40,7 @@ const projects = [
     links: { github: "https://github.com/Shreyashp26/Ni-Sparsh", paper: "https://drive.google.com/file/d/1qixV6X7M1hr2DqWzRN52R2tQIgWz4w3o/view" }
   },
   {
-    title: "Wegweiser — Germany Newcomer AI Agent",
+    title: "Wegweiser",
     description:
       "Built an agentic AI system to help international students navigate life in Germany, developed during the Hugging Face AI Agents Course. Using smolagents CodeAgent architecture, the system autonomously selects across tools for bureaucracy guidance, German language coaching, translation, and checklist generation.",
     tags: [
