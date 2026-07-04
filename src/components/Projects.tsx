@@ -40,6 +40,20 @@ const projects = [
     links: { github: "https://github.com/Shreyashp26/Ni-Sparsh", paper: "https://drive.google.com/file/d/1qixV6X7M1hr2DqWzRN52R2tQIgWz4w3o/view" }
   },
   {
+    title: "Wegweiser — Germany Newcomer AI Agent",
+    description:
+      "Built an agentic AI system to help international students navigate life in Germany, developed during the Hugging Face AI Agents Course. Using smolagents CodeAgent architecture, the system autonomously selects across tools for bureaucracy guidance, German language coaching, translation, and checklist generation.",
+    tags: [
+      "Python",
+      "smolagents",
+      "Gradio",
+      "LLaMA",
+      "HuggingFace",
+      "Agentic AI"
+    ],
+    links: { github: "https://github.com/Shreyashp26/AI_Agent_Wegweiser" }
+  },
+  {
     title: "Vi-Sahay",
     description:
       "Developed Vi-Sahay, an innovative Android/iOS and web-based disaster alert and communication platform that connects NSS/NCC volunteers with the National Disaster Response Force (NDRF). The system enables real-time geo-location alerts, volunteer registration, and group chat communication to ensure efficient coordination during emergencies. Built using Flutter, Firebase, and PHP, it also supports donation management.",
