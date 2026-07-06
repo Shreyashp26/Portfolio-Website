@@ -2,21 +2,22 @@ import { motion } from 'motion/react';
 import SectionHeader from './SectionHeader';
 
 const skillCategories = [
-  {
-    title: "Programming",
-    skills: ["Python", "C++", "SQL"]
-  },
+ 
   {
     title: "AI / Machine Learning",
-    skills: ["TensorFlow", "PyTorch", "Scikit-Learn", "Computer Vision", "Deep Learning"]
+    skills: ["TensorFlow", "PyTorch", "Scikit-Learn", "Computer Vision", "Model Training"]
+  },
+  {
+    title: "Data Engineering",
+    skills: ["Python", "SQL", "NoSQL", "AWS", "BigQuery" ]
   },
   {
     title: "Generative AI",
-    skills: ["LLMs", "Prompt Engineering", "LangChain", "AI Agents", "NLP", "Hugging Face"]
+    skills: ["LLMs", "Prompt Engineering", "LangChain", "AI Agents", "Hugging Face"]
   },
   {
     title: "Tools & Frameworks",
-    skills: ["Git","Tableau", "Qualtrics", "Canva", "AI-Tools"]
+    skills: ["Git/GitHub", "Tableau", "MySql", "Claude", "Cursor", "AI-Tools"]
   }
 ];
 
