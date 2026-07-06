@@ -1,5 +1,5 @@
 import { motion } from 'motion/react';
-import { Brain, Layers } from 'lucide-react';
+import { Brain, Database } from 'lucide-react';
 import SectionHeader from './SectionHeader';
 
 export default function Services() {
@@ -8,12 +8,12 @@ export default function Services() {
       <div className="max-w-7xl mx-auto px-6 md:px-12">
         <SectionHeader 
           title="What I Bring to the Table"
-          subtitle="How I can contribute to building impactful AI solutions."
+          subtitle="Building intelligent AI systems and transforming data into meaningful solutions."
           align="center"
         />
 
         <div className="grid md:grid-cols-2 gap-8">
-          {/* Card 1: AI & ML Development */}
+          {/* Card 1: AI & Machine Learning */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -27,19 +27,28 @@ export default function Services() {
                 <Brain className="w-8 h-8 text-white" />
               </div>
               
-              <h3 className="text-2xl font-bold text-white mb-4">AI & Machine Learning Development</h3>
+              <h3 className="text-2xl font-bold text-white mb-4">
+                AI & Machine Learning
+              </h3>
+
               <p className="text-text-secondary leading-relaxed mb-6">
-                Building intelligent systems using machine learning, NLP, and computer vision through hands-on projects and real-world applications.
+                Building intelligent systems using machine learning, NLP, 
+                computer vision, and generative AI through hands-on projects 
+                and real-world applications.
               </p>
               
               <ul className="space-y-3">
                 {[
-                  'NLP & LLM-based Applications', 
-                  'Computer Vision Systems (OpenCV, MediaPipe)', 
-                  'AI tools', 
-                  'AI Agents'
+                  'Machine Learning & Deep Learning',
+                  'NLP & LLM-based Applications',
+                  'Computer Vision (OpenCV, MediaPipe)',
+                  'Generative AI & AI Agents',
+                  'Model Development & Optimization'
                 ].map((item, i) => (
-                  <li key={i} className="flex items-start gap-3 text-sm text-text-secondary">
+                  <li
+                    key={i}
+                    className="flex items-start gap-3 text-sm text-text-secondary"
+                  >
                     <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-accent-purple flex-shrink-0" />
                     <span>{item}</span>
                   </li>
@@ -48,7 +57,7 @@ export default function Services() {
             </div>
           </motion.div>
 
-          {/* Card 2: AI Applications & Data Solutions */}
+          {/* Card 2: Data Science & Data Engineering */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -59,22 +68,31 @@ export default function Services() {
             
             <div className="relative z-10">
               <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-accent-cyan to-accent-blue flex items-center justify-center mb-8 shadow-[0_0_20px_rgba(34,211,238,0.4)]">
-                <Layers className="w-8 h-8 text-white" />
+                <Database className="w-8 h-8 text-white" />
               </div>
               
-              <h3 className="text-2xl font-bold text-white mb-4">AI Applications & Data Solutions</h3>
+              <h3 className="text-2xl font-bold text-white mb-4">
+                Data Science & Data Engineering
+              </h3>
+
               <p className="text-text-secondary leading-relaxed mb-6">
-                Applying AI and data analysis to solve real-world problems through scalable applications and data-driven insights.
+                Working with data across the full lifecycle — from extraction, 
+                cleaning, and transformation to analysis, visualization, and 
+                building reliable data-driven solutions.
               </p>
               
               <ul className="space-y-3">
                 {[
-                  'AI Chatbots using Hugging Face APIs', 
-                  'Data Analysis & Visualization (Python, SQL, Tableau)', 
-                  'Propt Engineering', 
-                  'Model Development & Optimization'
+                  'Data Analysis with Python & SQL',
+                  'ETL Pipelines & Data Transformation',
+                  'Data Cleaning & Preprocessing',
+                  'Data Visualization with Tableau',
+                  'Data Warehousing & BigQuery Concepts'
                 ].map((item, i) => (
-                  <li key={i} className="flex items-start gap-3 text-sm text-text-secondary">
+                  <li
+                    key={i}
+                    className="flex items-start gap-3 text-sm text-text-secondary"
+                  >
                     <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-accent-cyan flex-shrink-0" />
                     <span>{item}</span>
                   </li>
