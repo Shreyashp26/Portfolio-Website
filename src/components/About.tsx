@@ -6,7 +6,7 @@ export default function About() {
   const stats = [
     { label: 'Projects Completed', value: '10+' },
     { label: 'Years Experience', value: '1' },
-    { label: 'Research Papers', value: '3' },
+    { label: 'Research Papers', value: '4' },
     { label: 'Research Reads', value: '2000+' },
   ];
 
@@ -27,10 +27,10 @@ export default function About() {
             className="space-y-4 text-text-secondary text-lg leading-relaxed"
           >
             <p>
-              I am an AI/ML Engineer with a strong passion for <span className="text-white font-medium">Generative AI, Natural Language Processing, and Computer Vision</span>. I hold an <span className="text-white font-medium">MSc in Computing (Artificial Intelligence)</span> from Dublin City University and specialize in building intelligent systems that solve real-world problems.
+              I am an AI/ML Engineer with a strong passion for <span className="text-white font-medium">Generative AI, Machine Learning, and Data Engineering </span>. I hold an <span className="text-white font-medium">MSc in Computing (Artificial Intelligence)</span> from Dublin City University and specialize in building intelligent systems that solve real-world problems.
             </p>
             <p>
-             My experience includes working on AI chatbots, computer vision applications, and real-world problem-solving projects through internships and projects. I use machine learning models and fine-tuned LLMs like LLaMA and Qwen in real-world applications, including chatbots and deepfake detection.
+             My experience includes working on AI chatbots, Developing dashboards, and problem-solving through internships and projects. I have used fine-tuned LLMs like LLaMA and Qwen in real-world applications, including chatbots and AI Agents.
             </p>
             <p>
               Whether it's fine-tuning LLMs or deploying AI-powered applications, I thrive at the intersection of innovation and impactful problem-solving.
@@ -79,7 +79,7 @@ export default function About() {
                 <Database className="w-6 h-6" />
               </div>
               <div>
-                <h3 className="text-xl font-semibold text-white mb-2">Data Science</h3>
+                <h3 className="text-xl font-semibold text-white mb-2">Data Engineering</h3>
                 <p className="text-text-secondary text-sm">Extracting insights from large datasets using Python, SQL, and Tableau, enabling data-driven decision-making.</p>
               </div>
             </div>
