@@ -1,20 +1,38 @@
-import { motion } from 'motion/react';
+import { motion, useMotionValue, useSpring } from 'motion/react';
 import { ArrowRight, Download, Github, Linkedin } from 'lucide-react';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
+
+// Profile photo. Best practice: put the file in /public (e.g. public/profile.jpg)
+// and set this to '/profile.jpg' so it is served by Vercel with the site.
+const PROFILE_PHOTO = 'https://i.ibb.co/N6Mz0SFn/image.png';
 
 export default function Hero() {
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  // Parallax uses motion values so mouse movement does not re-render the component.
+  const rawX = useMotionValue(0);
+  const rawY = useMotionValue(0);
+  const x = useSpring(rawX, { stiffness: 50, damping: 15 });
+  const y = useSpring(rawY, { stiffness: 50, damping: 15 });
+  const [photoFailed, setPhotoFailed] = useState(false);
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
-      setMousePos({
-        x: (e.clientX / window.innerWidth - 0.5) * 20,
-        y: (e.clientY / window.innerHeight - 0.5) * 20,
-      });
+      rawX.set((e.clientX / window.innerWidth - 0.5) * 20);
+      rawY.set((e.clientY / window.innerHeight - 0.5) * 20);
     };
     window.addEventListener('mousemove', handleMouseMove);
     return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, []);
+  }, [rawX, rawY]);
+
+  // Random values computed once, so the particles do not jump on every render.
+  const particles = useMemo(
+    () =>
+      Array.from({ length: 6 }, () => ({
+        left: 20 + Math.random() * 60,
+        duration: 4 + Math.random() * 3,
+        delay: Math.random() * 3,
+      })),
+    []
+  );
 
   return (
     <section id="home" className="relative min-h-screen flex items-center pt-20 overflow-hidden">
@@ -65,16 +83,12 @@ export default function Hero() {
         {/* Visual Element */}
         <motion.div 
           initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ 
-            opacity: 1, 
-            scale: 1,
-            x: mousePos.x,
-            y: mousePos.y
-          }}
-          transition={{ duration: 1, delay: 0.2, x: { type: 'spring', stiffness: 50 }, y: { type: 'spring', stiffness: 50 } }}
-          className="relative hidden lg:flex justify-center items-center h-[600px]"
+          animate={{ opacity: 1, scale: 1 }}
+          style={{ x, y }}
+          transition={{ duration: 1, delay: 0.2 }}
+          className="relative flex justify-center items-center h-[300px] sm:h-[380px] lg:h-[600px]"
         >
-          <div className="relative w-[450px] h-[450px] xl:w-[550px] xl:h-[550px] flex items-center justify-center">
+          <div className="relative w-[240px] h-[240px] sm:w-[320px] sm:h-[320px] lg:w-[450px] lg:h-[450px] xl:w-[550px] xl:h-[550px] flex items-center justify-center">
             {/* Deep Blue Background Glow */}
             <div className="absolute w-[100%] h-[100%] bg-blue-600/20 rounded-full blur-[120px] -z-10" />
             <div className="absolute w-[70%] h-[70%] bg-cyan-500/10 rounded-full blur-[80px] -z-10 animate-pulse" style={{ animationDuration: '4s' }} />
@@ -92,7 +106,7 @@ export default function Hero() {
             />
 
             {/* Elegant Static Image Container */}
-            <div className="relative w-[380px] h-[380px] xl:w-[450px] xl:h-[450px] z-10">
+            <div className="relative w-[220px] h-[220px] sm:w-[280px] sm:h-[280px] lg:w-[380px] lg:h-[380px] xl:w-[450px] xl:h-[450px] z-10">
               {/* Outer Glass Ring */}
               <div className="absolute -inset-6 rounded-full border border-white/5 bg-white/[0.02] backdrop-blur-md shadow-[0_0_80px_rgba(37,99,235,0.2)]" />
               
@@ -101,14 +115,22 @@ export default function Hero() {
                 <div className="w-full h-full rounded-full overflow-hidden relative bg-[#050B14] group">
                   
                   {/* Image */}
-                  <img 
-                    src="https://i.ibb.co/N6Mz0SFn/image.png" 
-                    alt="Shreyash Patil" 
-                    className="w-full h-full object-cover object-top filter contrast-110 brightness-90 group-hover:scale-105 transition-transform duration-700 ease-out"
-                    onError={(e) => {
-                      (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=400&h=400&auto=format&fit=crop";
-                    }}
-                  />
+                  {photoFailed ? (
+                    // Never fall back to a stranger's stock photo: show initials instead.
+                    <div className="w-full h-full flex items-center justify-center font-heading font-bold text-6xl lg:text-8xl text-white/80">
+                      SP
+                    </div>
+                  ) : (
+                    <img
+                      src={PROFILE_PHOTO}
+                      alt="Shreyash Patil"
+                      width={450}
+                      height={450}
+                      fetchPriority="high"
+                      className="w-full h-full object-cover object-top filter contrast-110 brightness-90 group-hover:scale-105 transition-transform duration-700 ease-out"
+                      onError={() => setPhotoFailed(true)}
+                    />
+                  )}
                   
                   {/* Subtle inner shadow for depth */}
                   <div className="absolute inset-0 bg-gradient-to-tr from-[#050B14]/80 via-transparent to-transparent mix-blend-overlay" />
@@ -127,7 +149,7 @@ export default function Hero() {
               rel="noopener noreferrer"
               animate={{ y: [-10, 10, -10] }}
               transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute top-[20%] left-[-5%] z-20 bg-[#0A1128]/80 backdrop-blur-xl border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.5)] p-4 rounded-2xl flex items-center gap-3 hover:bg-white/10 transition-colors group"
+              className="absolute hidden lg:flex top-[20%] left-[-5%] z-20 bg-[#0A1128]/80 backdrop-blur-xl border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.5)] p-4 rounded-2xl items-center gap-3 hover:bg-white/10 transition-colors group"
             >
               <div className="p-3 bg-white/5 rounded-full group-hover:bg-accent-purple/20 transition-colors">
                 <Github className="w-6 h-6 text-white" />
@@ -145,7 +167,7 @@ export default function Hero() {
               rel="noopener noreferrer"
               animate={{ y: [10, -10, 10] }}
               transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-              className="absolute bottom-[20%] right-[-5%] z-20 bg-[#0A1128]/80 backdrop-blur-xl border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.5)] p-4 rounded-2xl flex items-center gap-3 hover:bg-white/10 transition-colors group"
+              className="absolute hidden lg:flex bottom-[20%] right-[-5%] z-20 bg-[#0A1128]/80 backdrop-blur-xl border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.5)] p-4 rounded-2xl items-center gap-3 hover:bg-white/10 transition-colors group"
             >
               <div className="p-3 bg-white/5 rounded-full group-hover:bg-accent-blue/20 transition-colors">
                 <Linkedin className="w-6 h-6 text-white" />
@@ -157,12 +179,12 @@ export default function Hero() {
             </motion.a>
 
             {/* Subtle Rising Particles */}
-            {[...Array(6)].map((_, i) => (
+            {particles.map((p, i) => (
               <motion.div
                 key={i}
                 className="absolute w-1.5 h-1.5 rounded-full bg-accent-cyan shadow-[0_0_8px_#22d3ee]"
                 style={{
-                  left: `${20 + Math.random() * 60}%`,
+                  left: `${p.left}%`,
                   bottom: '10%',
                 }}
                 animate={{
@@ -171,10 +193,10 @@ export default function Hero() {
                   scale: [0.5, 1.5, 0.5],
                 }}
                 transition={{
-                  duration: 4 + Math.random() * 3,
+                  duration: p.duration,
                   repeat: Infinity,
                   ease: "easeOut",
-                  delay: Math.random() * 3,
+                  delay: p.delay,
                 }}
               />
             ))}
@@ -184,7 +206,7 @@ export default function Hero() {
       
       {/* Scroll Indicator */}
       <motion.div 
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
+        className="absolute bottom-10 left-1/2 -translate-x-1/2 hidden lg:flex flex-col items-center gap-2"
         animate={{ y: [0, 10, 0] }}
         transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
       >

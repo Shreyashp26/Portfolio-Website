@@ -9,7 +9,14 @@ import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import 'swiper/css/effect-coverflow';
 
-const projects = [
+type Project = {
+  title: string;
+  description: string;
+  tags: string[];
+  links: { github?: string; demo?: string; paper?: string };
+};
+
+const projects: Project[] = [
   {
     title: "Deepfake Detection",
     description:
@@ -78,7 +85,7 @@ const projects = [
       "PHP",
       "MySQL"
     ],
-    links: { github: "https://github.com/Shreyashp26/Sevarohi", demo: "#" }
+    links: { github: "https://github.com/Shreyashp26/Sevarohi" }
   }
 ];
 export default function Projects() {
@@ -92,11 +99,11 @@ export default function Projects() {
 
         <div className="relative group/slider max-w-6xl mx-auto">
           {/* Navigation Buttons - More prominent and positioned outside */}
-          <button className="swiper-button-prev-custom absolute -left-4 md:-left-20 top-1/2 -translate-y-1/2 z-40 w-14 h-14 rounded-full bg-accent-purple/30 backdrop-blur-xl border border-white/30 flex items-center justify-center text-white hover:bg-accent-purple/60 hover:border-white hover:scale-110 transition-all shadow-[0_0_30px_rgba(168,85,247,0.4)] disabled:opacity-0">
+          <button aria-label="Previous project" className="swiper-button-prev-custom absolute -left-4 md:-left-20 top-1/2 -translate-y-1/2 z-40 w-14 h-14 rounded-full bg-accent-purple/30 backdrop-blur-xl border border-white/30 flex items-center justify-center text-white hover:bg-accent-purple/60 hover:border-white hover:scale-110 transition-all shadow-[0_0_30px_rgba(168,85,247,0.4)] disabled:opacity-0">
             <ChevronLeft className="w-8 h-8" />
           </button>
           
-          <button className="swiper-button-next-custom absolute -right-4 md:-right-20 top-1/2 -translate-y-1/2 z-40 w-14 h-14 rounded-full bg-accent-purple/30 backdrop-blur-xl border border-white/30 flex items-center justify-center text-white hover:bg-accent-purple/60 hover:border-white hover:scale-110 transition-all shadow-[0_0_30px_rgba(168,85,247,0.4)] disabled:opacity-0">
+          <button aria-label="Next project" className="swiper-button-next-custom absolute -right-4 md:-right-20 top-1/2 -translate-y-1/2 z-40 w-14 h-14 rounded-full bg-accent-purple/30 backdrop-blur-xl border border-white/30 flex items-center justify-center text-white hover:bg-accent-purple/60 hover:border-white hover:scale-110 transition-all shadow-[0_0_30px_rgba(168,85,247,0.4)] disabled:opacity-0">
             <ChevronRight className="w-8 h-8" />
           </button>
 
@@ -151,17 +158,17 @@ export default function Projects() {
                   
                   <div className="flex items-center gap-4 pt-4 border-t border-white/10">
                     {project.links.github && (
-                      <a href={project.links.github} className="text-text-secondary hover:text-white transition-colors" aria-label="GitHub">
+                      <a href={project.links.github} target="_blank" rel="noopener noreferrer" className="text-text-secondary hover:text-white transition-colors" aria-label="GitHub">
                         <Github className="w-5 h-5" />
                       </a>
                     )}
                     {project.links.demo && (
-                      <a href={project.links.demo} className="text-text-secondary hover:text-white transition-colors" aria-label="Live Demo">
+                      <a href={project.links.demo} target="_blank" rel="noopener noreferrer" className="text-text-secondary hover:text-white transition-colors" aria-label="Live Demo">
                         <ExternalLink className="w-5 h-5" />
                       </a>
                     )}
                     {project.links.paper && (
-                      <a href={project.links.paper} className="text-text-secondary hover:text-white transition-colors" aria-label="Research Paper">
+                      <a href={project.links.paper} target="_blank" rel="noopener noreferrer" className="text-text-secondary hover:text-white transition-colors" aria-label="Research Paper">
                         <FileText className="w-5 h-5" />
                       </a>
                     )}

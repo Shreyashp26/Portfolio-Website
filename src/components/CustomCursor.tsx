@@ -4,8 +4,14 @@ import { motion } from 'motion/react';
 export default function CustomCursor() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isHovering, setIsHovering] = useState(false);
+  // Only enable the custom cursor on devices with a precise pointer (mouse/trackpad).
+  const [enabled] = useState(
+    () => typeof window !== 'undefined' && window.matchMedia('(pointer: fine)').matches
+  );
 
   useEffect(() => {
+    if (!enabled) return;
+    document.body.classList.add('custom-cursor');
     const updateMousePosition = (e: MouseEvent) => {
       setMousePosition({ x: e.clientX, y: e.clientY });
     };
@@ -31,8 +37,11 @@ export default function CustomCursor() {
     return () => {
       window.removeEventListener('mousemove', updateMousePosition);
       window.removeEventListener('mouseover', handleMouseOver);
+      document.body.classList.remove('custom-cursor');
     };
-  }, []);
+  }, [enabled]);
+
+  if (!enabled) return null;
 
   return (
     <>

@@ -19,7 +19,7 @@ export default function Navbar() {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
     };
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -59,6 +59,8 @@ export default function Navbar() {
 
         {/* Mobile Menu Toggle */}
         <button
+          aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
+          aria-expanded={isMobileMenuOpen}
           className="md:hidden text-white"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
         >
