@@ -34,7 +34,13 @@
 @layer base {
   body {
     @apply bg-bg-primary text-text-primary font-sans overflow-x-hidden;
-    cursor: none; /* Hide default cursor for custom orb */
+  }
+
+  /* Hide the native cursor only when the custom orb is active (mouse devices) */
+  body.custom-cursor,
+  body.custom-cursor a,
+  body.custom-cursor button {
+    cursor: none;
   }
   
   h1, h2, h3, h4, h5, h6 {
